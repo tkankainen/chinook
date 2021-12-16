@@ -7,8 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Database {
-    private static final String JDBC_URL = "jdbc:sqlite:/Users/taina/sqlite/Chinook_Sqlite.sqlite";
-    	//System.getenv("JDBC_DATABASE_URL"); ympäristömuuttuja!  - jos try-each muut niin riittää pelkkä connection?
+    private static final String JDBC_URL = System.getenv("JDBC_DATABASE_URL");
+    		//"jdbc:sqlite:/Users/taina/sqlite/Chinook_Sqlite.sqlite";
+    	// jos try-each muut niin riittää pelkkä connection?
 
     public Connection connect() throws SQLException {
         return DriverManager.getConnection(JDBC_URL);

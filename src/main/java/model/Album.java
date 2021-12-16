@@ -12,6 +12,11 @@ public class Album {
 		this.artistId = artistId;
 	}
 	
+	public Album(String title, long artistId) {
+		this.title = title;
+		this.artistId = artistId;
+	}
+
 	public long getAlbumId() {
 		return albumId;
 	}

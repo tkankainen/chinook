@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import database.ArtistDao;
 import model.Artist;
 
-@WebServlet("/")
+@WebServlet("/artists")
 public class ArtistListServlet extends HttpServlet{
 	
 	private ArtistDao dao = new ArtistDao();
@@ -23,9 +23,6 @@ public class ArtistListServlet extends HttpServlet{
 		
 		req.setAttribute("artists", artists);
 		req.getRequestDispatcher("/WEB-INF/artistList.jsp").forward(req, resp);
-		
-		// haetaan kaikki artistit, välitetään ne JSP-sivulle
-		resp.getWriter().println(artists );
 	}
 	
 	@Override
@@ -35,7 +32,6 @@ public class ArtistListServlet extends HttpServlet{
 		Artist newArtist = new Artist(artist);
 		this.dao.addArtist(newArtist);
 		
-		resp.sendRedirect("/");
+		resp.sendRedirect("/artists");
 	}
-
 }

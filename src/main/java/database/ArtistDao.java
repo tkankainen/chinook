@@ -60,5 +60,58 @@ public class ArtistDao {
 			return false;
 		}
     }
+    
+    public List<Artist> getArtistByName(String searchTerm) {
+    	String select = "SELECT ArtistId, Name FROM Artist WHERE Name LIKE ? ORDER BY Name ASC;";
+    	Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet results = null;
+		List<Artist> Artists = new ArrayList<>();
+		try {
+			connection = db.connect();
+			statement = connection.prepareStatement(select);
+			statement.setString(1, "%" + searchTerm + "%");
+			results = statement.executeQuery();
+			while(results.next()) {
+				long id = results.getLong("artistId");
+				String name = results.getString("name");
+				
+				Artist artist = new Artist(id, name);
+				Artists.add(artist);
+			}
+			return Artists;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.db.close(connection, statement, results);
+		}
+		return null;
+    }
+    
+    public Artist getArtistByArtistId (long artistId) {
+    	String select = "SELECT ArtistId, Name FROM Artist WHERE ArtistId = ?;";
+    	Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet results = null;
+		
+		try {
+			connection = db.connect();
+			statement = connection.prepareStatement(select);
+			statement.setLong(1, artistId);
+			results = statement.executeQuery();
+			while(results.next()) {
+				String name = results.getString("name");
+				Artist artist = new Artist(artistId, name);
+				
+				return artist;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.db.close(connection, statement, results);
+		}
+		return null;
+    }
 	
 }
