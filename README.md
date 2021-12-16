@@ -1,4 +1,3 @@
-
 Tiedosto	                            | Tarkoitus
 ----------------------------------------|---------------------
 [README.md](README.md)                                                  | Tämä tiedosto
@@ -20,4 +19,4 @@ Tiedosto	                            | Tarkoitus
 [src/test/java](src/test/java)                                          | JUnit-testiluokkien pakettien juurihakemisto
 [src/test/java/servlet/ServletTest.java](src/test/java/servlet/ServletTest.java)  | AlbumListServlet-, ArtistListServlet- ja IndexServlet-luokkien JUnit-testit
 [src/test/java/testserver/TestServer.java](src/test/java/testserver/TestServer.java)  | Apuluokka palvelimen testaamiseksi
-[git-log.txt] (git-log.txt)												| Lista tehdyistä commiteista
+[git-log.txt](git-log.txt)												| Lista tehdyistä commiteista
