@@ -1,0 +1,6 @@
+5616c15 (HEAD -> main, origin/main) read-me
+bd7e72f Update README.md
+9f3fdcc finished project
+996046e added search & tests
+29af8f0 added artistlist & albumlist
+d89c593 (origin/master) Initial commit
