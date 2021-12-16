@@ -1,5 +1,18 @@
-5616c15 (HEAD -> main, origin/main) read-me
+c80fd37 (HEAD -> main, origin/main) Merge branch 'main' of https://github.com/tkankainen/chinook
+85a97b4 final
+e18d2b0 Update README.md
+7f79c26 read-me
+daa239f Merge branch 'main' of https://github.com/tkankainen/chinook
+1be0550 final
+a6e01e2 Update README.md
+f19b6b1 final
+5616c15 read-me
+bff2519 read-me
 bd7e72f Update README.md
+e193146 Delete .DS_Store
+d75024c Delete .DS_Store
+743a4f7 finished project
+680b065 finished project
 9f3fdcc finished project
 996046e added search & tests
 29af8f0 added artistlist & albumlist
