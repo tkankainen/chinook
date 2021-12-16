@@ -14,7 +14,7 @@ import database.ArtistDao;
 import model.Album;
 import model.Artist;
 
-@WebServlet("")
+@WebServlet("/")
 public class IndexServlet extends HttpServlet {
 	
 	private ArtistDao artistdao = new ArtistDao();
