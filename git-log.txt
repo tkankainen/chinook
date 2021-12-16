@@ -1,4 +1,0 @@
-9f3fdcc (HEAD -> main, origin/main) finished project
-996046e added search & tests
-29af8f0 added artistlist & albumlist
-d89c593 (origin/master) Initial commit
