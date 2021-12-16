@@ -1,5 +1,5 @@
 
-Sijainti                                | Tarkoitus
+Tiedosto	                             | Tarkoitus
 ----------------------------------------|---------------------
 [README.md](README.md)                                                  | Tämä tiedosto
 [pom.xml](pom.xml)                                                      | "[Project Object Model](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)"-tiedosto mm. riippuvuuksien määrittelemiseksi
@@ -11,6 +11,7 @@ Sijainti                                | Tarkoitus
 [src/main/webapp/WEB-INF](src/main/webapp/WEB-INF)                      | Erityinen hakemisto, jonne on estetty suora pääsy selaimilta ¹
 [src/main/webapp/WEB-INF/index.jsp](src/main/webapp/WEB-INF/index.jsp)  | IndexServlet-luokan käyttämä sivupohja
 [src/test/java](src/test/java)                                          | JUnit-testiluokkien pakettien juurihakemisto
-[src/test/java/servlet/IndexServletTest.java](src/test/java/servlet/IndexServletTest.java)  | IndexServlet-luokan JUnit-testit
+[src/test/java/servlet/IndexServletTest.java](src/test/java/servlet/ServletTest.java)  | AlbumListServlet-, ArtistListServlet- ja IndexServlet-luokkien JUnit-testit
 [src/test/java/testserver/TestServer.java](src/test/java/testserver/TestServer.java)  | Apuluokka palvelimen testaamiseksi
 [src/test/resources](src/test/resources)                                | Hakemisto esimerkiksi testien .properties-tiedostoille
+git-log.txt																| Lista tehdyistä commiteista
