@@ -36,18 +36,13 @@ public class AlbumListServlet extends HttpServlet{
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String title = req.getParameter("album");
-		resp.getWriter().println(title); //ok
 		long artistId = Long.parseLong(req.getParameter("artistId")); //?
-		resp.getWriter().println(artistId); //ok
 		
 		Album newAlbum = new Album(title, artistId);
 		this.albumdao.addAlbum(newAlbum);
-		resp.getWriter().println(newAlbum.getTitle()); //ok
 		
 		List<Album> albums = this.albumdao.getAlbums(artistId);
-		resp.getWriter().println(albums);
 		Artist artist = this.artistdao.getArtistByArtistId(artistId);
-		resp.getWriter().println(artist.getName()); // ok
 		
 		req.setAttribute("albums", albums);
 		req.setAttribute("artist", artist);

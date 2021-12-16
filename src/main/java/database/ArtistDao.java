@@ -15,36 +15,28 @@ public class ArtistDao {
 	private Database db = new Database();
 
 	public List<Artist> getAllArtists() {
-		String selectAll = "SELECT ArtistId, Name FROM Artist ORDER BY Name ASC;";
 		
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet results = null;
-		List<Artist> allArtists = new ArrayList<>();
-		try {
-			connection = db.connect();
-			statement = connection.prepareStatement(selectAll);
-			results = statement.executeQuery();
-			while(results.next()) {
-				long id = results.getLong("artistId");
+		List<Artist> allArtists = new ArrayList<>();	
+		try (Connection connection = db.connect();
+	            PreparedStatement statement = connection.prepareStatement("SELECT ArtistId, Name FROM Artist ORDER BY Name ASC;");
+	            ResultSet results = statement.executeQuery()) {
+
+	        while (results.next()) {
+	        	long id = results.getLong("artistId");
 				String name = results.getString("name");
 				
 				Artist artist = new Artist(id, name);
 				allArtists.add(artist);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			this.db.close(connection, statement, results);
-		}
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 		return allArtists;
 	}
-	
+
     public boolean addArtist(Artist newArtist) {
     	
-    	int lines = 0;
-		//ResultSet results = null;
-    	
+    	int lines = 0;	
     	try (Connection connection = db.connect();
     			PreparedStatement statement = connection.prepareStatement("INSERT INTO Artist (Name) VALUES (?);");){
 			String artist = newArtist.getName();
@@ -62,56 +54,47 @@ public class ArtistDao {
     }
     
     public List<Artist> getArtistByName(String searchTerm) {
-    	String select = "SELECT ArtistId, Name FROM Artist WHERE Name LIKE ? ORDER BY Name ASC;";
-    	Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet results = null;
-		List<Artist> Artists = new ArrayList<>();
-		try {
-			connection = db.connect();
-			statement = connection.prepareStatement(select);
-			statement.setString(1, "%" + searchTerm + "%");
-			results = statement.executeQuery();
-			while(results.next()) {
-				long id = results.getLong("artistId");
-				String name = results.getString("name");
-				
-				Artist artist = new Artist(id, name);
-				Artists.add(artist);
-			}
-			return Artists;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			this.db.close(connection, statement, results);
-		}
-		return null;
+    	
+    	List<Artist> Artists = new ArrayList<>();    	
+    	try (Connection connection = db.connect();
+	            PreparedStatement statement = connection.prepareStatement(
+	            "SELECT ArtistId, Name FROM Artist WHERE Name LIKE ? ORDER BY Name ASC;");){
+    		statement.setString(1, "%" + searchTerm + "%");
+    		
+    		try (ResultSet results = statement.executeQuery();) {
+		        while (results.next()) {
+		        	long id = results.getLong("artistId");
+					String name = results.getString("name");
+					
+					Artist artist = new Artist(id, name);
+					Artists.add(artist);
+		        }
+	        return Artists;  
+    		}
+    	} catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+    	return null;
+    }
+
+    public Artist getArtistByArtistId (long artistId) {
+    	
+    	try (Connection connection = db.connect();
+	            PreparedStatement statement = connection.prepareStatement("SELECT ArtistId, Name FROM Artist WHERE ArtistId = ?;");){
+    		statement.setLong(1, artistId);
+    		
+    		try (ResultSet results = statement.executeQuery();) {
+		        while (results.next()) {
+		        	String name = results.getString("name");
+					Artist artist = new Artist(artistId, name);
+					
+					return artist;
+		        }
+    		}
+    	} catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+    	return null;
     }
     
-    public Artist getArtistByArtistId (long artistId) {
-    	String select = "SELECT ArtistId, Name FROM Artist WHERE ArtistId = ?;";
-    	Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet results = null;
-		
-		try {
-			connection = db.connect();
-			statement = connection.prepareStatement(select);
-			statement.setLong(1, artistId);
-			results = statement.executeQuery();
-			while(results.next()) {
-				String name = results.getString("name");
-				Artist artist = new Artist(artistId, name);
-				
-				return artist;
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			this.db.close(connection, statement, results);
-		}
-		return null;
-    }
-	
 }

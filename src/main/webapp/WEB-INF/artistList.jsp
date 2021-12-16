@@ -11,12 +11,12 @@
 		<input type="submit" value="Add artist" />
 	</form>
 	<ol>
-		<c:forEach items="${ artists }" var="artist">
-			<li>
-				<a href="albums?artistId=<c:out value="${ artist.getArtistId() }" />">
-				<c:out value="${ artist.getName() }" /></a>
-			</li>
-		</c:forEach>
+	<c:forEach items="${ artists }" var="artist">
+		<li>
+			<a href="albums?artistId=<c:out value="${ artist.getArtistId() }" />">
+			<c:out value="${ artist.getName() }" /></a>
+		</li>
+	</c:forEach>
 	</ol>
 </body>
 </html>

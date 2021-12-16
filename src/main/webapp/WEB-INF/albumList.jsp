@@ -12,11 +12,11 @@
 		</c:when>
 		<c:otherwise>
 			<ul>
-				<c:forEach items="${ albums }" var="album">
-					<li>
-						<c:out value="${ album.getTitle() }" />
-					</li>
-				</c:forEach>
+			<c:forEach items="${ albums }" var="album">
+				<li>
+					<c:out value="${ album.getTitle() }" />
+				</li>
+			</c:forEach>
 			</ul>
 		</c:otherwise>
 	</c:choose>

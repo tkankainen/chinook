@@ -15,65 +15,59 @@ public class AlbumDao {
 	private Database db = new Database();
 	
 	public List<Album> getAlbums(long artistId) {
-		String selectAlbums = "SELECT albumId, title, artistId FROM Album WHERE artistId = ? ORDER BY title ASC;";
 		
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet results = null;
 		List<Album> Albums = new ArrayList<>();
-		try {
-			connection = db.connect();
-			statement = connection.prepareStatement(selectAlbums);
+		
+		try (Connection connection = db.connect(); 
+				PreparedStatement statement = connection.prepareStatement(
+				"SELECT AlbumId, Title, ArtistId FROM Album WHERE ArtistId = ? ORDER BY Title ASC;");){
 			statement.setLong(1, artistId);
-			results = statement.executeQuery();
-			
-			while(results.next()) {
-				long albumId = results.getLong("albumId");
-				String title = results.getString("title");
-				
-				Album album = new Album(albumId, title, artistId);
-				Albums.add(album);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			this.db.close(connection, statement, results);
-		}
-		return Albums;
+    		
+    		try (ResultSet results = statement.executeQuery();) {
+		        while (results.next()) {
+		        	long albumId = results.getLong("albumId");
+					String title = results.getString("title");
+					
+					Album album = new Album(albumId, title, artistId);
+					Albums.add(album);
+		        }
+	        return Albums;  
+    		}
+    	} catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+    	return null;
 	}
 	
 	public List<Album> getAlbumByName(String searchTerm) {
-    	String select = "SELECT albumId, artistId, title FROM Album WHERE title LIKE ? ORDER BY title ASC;";
-    	Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet results = null;
+		
 		List<Album> Albums = new ArrayList<>();
-		try {
-			connection = db.connect();
-			statement = connection.prepareStatement(select);
-			statement.setString(1, "%" + searchTerm + "%");
-			results = statement.executeQuery();
-			while(results.next()) {
-				long albumId = results.getLong("albumId");
-				long artistId = results.getLong("artistId");
-				String title = results.getString("title");
-				
-				Album album = new Album(albumId, title, artistId);
-				Albums.add(album);
-			}
-			return Albums;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			this.db.close(connection, statement, results);
-		}
-		return null;
+		
+		try (Connection connection = db.connect();
+	            PreparedStatement statement = connection.prepareStatement(
+	            "SELECT AlbumId, ArtistId, Title FROM Album WHERE Title LIKE ? ORDER BY Title ASC;");){
+    		statement.setString(1, "%" + searchTerm + "%");
+    		
+    		try (ResultSet results = statement.executeQuery();) {
+		        while (results.next()) {
+		        	long albumId = results.getLong("albumId");
+					long artistId = results.getLong("artistId");
+					String title = results.getString("title");
+					
+					Album album = new Album(albumId, title, artistId);
+					Albums.add(album);
+		        }
+	        return Albums;  
+    		}
+    	} catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+    	return null;
     }
 	
 public boolean addAlbum (Album newAlbum) {
     	
     	int lines = 0;
-		//ResultSet results = null;
     	
     	try (Connection connection = db.connect();
     			PreparedStatement statement = connection.prepareStatement("INSERT INTO Album (Title, ArtistId) VALUES (?, ?);");){

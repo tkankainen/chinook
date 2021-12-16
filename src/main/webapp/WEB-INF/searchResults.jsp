@@ -18,12 +18,12 @@
 		</c:when>
 		<c:otherwise>
 			<ul>
-				<c:forEach items="${ artists }" var="artist">
-					<li>
-						<a href="albums?artistId=<c:out value="${ artist.getArtistId() }" />">
-						<c:out value="${ artist.getName() }" /></a>
-					</li>
-				</c:forEach>
+			<c:forEach items="${ artists }" var="artist">
+				<li>
+					<a href="albums?artistId=<c:out value="${ artist.getArtistId() }" />">
+					<c:out value="${ artist.getName() }" /></a>
+				</li>
+			</c:forEach>
 			</ul>
 		</c:otherwise>
 	</c:choose>
@@ -35,12 +35,12 @@
 		</c:when>
 		<c:otherwise>
 			<ul>
-				<c:forEach items="${ albums }" var="album">
-					<li>
-						<a href="albums?artistId=<c:out value="${ album.getArtistId() }" />">
-						<c:out value="${ album.getTitle() }" /></a>
-					</li>
-				</c:forEach>
+			<c:forEach items="${ albums }" var="album">
+				<li>
+					<a href="albums?artistId=<c:out value="${ album.getArtistId() }" />">
+					<c:out value="${ album.getTitle() }" /></a>
+				</li>
+			</c:forEach>
 			</ul>
 		</c:otherwise>
 	</c:choose>
